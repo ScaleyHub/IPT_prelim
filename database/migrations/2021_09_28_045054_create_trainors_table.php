@@ -4,20 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
-{   /**
+class CreateTrainorsTable extends Migration
+{
+    /*
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('trainors', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 30)->unique();
-            $table->string('email')->unique();
-            $table->string('full_name');
+            $table->string('specialty', 100);
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -25,9 +26,9 @@ class CreateUsersTable extends Migration
      * Reverse the migrations.
      *
      * @return void
-     */ 
+     */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('trainors');
     }
 }
